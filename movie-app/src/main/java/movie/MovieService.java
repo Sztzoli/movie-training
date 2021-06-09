@@ -17,7 +17,7 @@ public class MovieService {
         return movies.stream().max(Comparator.comparing(Movie::getReleaseDate));
     }
 
-    private Movie findByFragment(String fragment){
+    public Movie findByFragment(String fragment){
         Optional<Movie> search = movies.stream().filter(movie -> movie.getName().contains(fragment)).findFirst();
         if (search.isEmpty()){
             throw new IllegalArgumentException("Movie not found");
