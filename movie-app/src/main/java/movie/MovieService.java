@@ -25,4 +25,7 @@ public class MovieService {
         return search.get();
     }
 
+    public List<Movie> getMovies() {
+        return new ArrayList<>(movies);
+    }
 }
