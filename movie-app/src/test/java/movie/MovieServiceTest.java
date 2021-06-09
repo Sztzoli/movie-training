@@ -28,5 +28,13 @@ class MovieServiceTest {
 
     @Test
     void findByFragment() {
+        Movie result = movieService.findByFragment("2");
+        assertEquals("film2",result.getName());
+    }
+
+    @Test
+    void findByFragmentThrowException() {
+        Exception ex = assertThrows(IllegalArgumentException.class, ()->movieService.findByFragment("sorozat"));
+        assertEquals("Movie not found" ,ex.getMessage());
     }
 }
