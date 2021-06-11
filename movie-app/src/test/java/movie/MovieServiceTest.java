@@ -11,18 +11,30 @@ class MovieServiceTest {
 
 
     MovieService movieService;
+    Movie movie1;
+    Movie movie2;
 
     @BeforeEach
     void setUp() {
         movieService = new MovieService();
-        Movie movie1 = new Movie("film",12, LocalDate.of(2020,1,1));
-        Movie movie2 = new Movie("film2",120, LocalDate.of(2020,3,1));
+        movie1 = new Movie("film",12, LocalDate.of(2020,1,1));
+        movie2 = new Movie("film2",120, LocalDate.of(2020,3,1));
         movieService.save(movie1);
         movieService.save(movie2);
     }
 
     @Test
-    void findNewestByRelease() {
+    void saveTest() {
+        movieService.save(movie1);
+        assertEquals("film", movieService.getMovies().get(0).getName());
+    }
+
+    @Test
+    void findNewestByReleaseTest() {
+        movieService.save(movie1);
+        movieService.save(movie2);
+        assertEquals("film2", movieService.findNewestByRelease().get().getName());
+
 
     }
 
@@ -37,4 +49,7 @@ class MovieServiceTest {
         Exception ex = assertThrows(IllegalArgumentException.class, ()->movieService.findByFragment("sorozat"));
         assertEquals("Movie not found" ,ex.getMessage());
     }
+
+
+
 }
